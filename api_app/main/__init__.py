@@ -1,8 +1,8 @@
 from flask import request, jsonify
 from flask_restful import Resource
 import os
-from distutils.version import StrictVersion
 import pandas as pd
+from packaging.version import parse
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -26,8 +26,8 @@ class CveApi(Resource):
 
             for key in cve_dict:
                 if cve_dict[key]["package"] == package:
-                    if StrictVersion(version) >= StrictVersion(cve_dict[key]["vulnerable_version"]) \
-                            and StrictVersion(version) < StrictVersion(cve_dict[key]["patched_version"]):
+                    if parse(version) >= parse(cve_dict[key]["vulnerable_version"]) \
+                            and parse(version) < parse(cve_dict[key]["patched_version"]):
                         cve_list.append(key)
 
             hostname = host
