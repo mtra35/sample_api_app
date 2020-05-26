@@ -27,6 +27,17 @@ class TestPost(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertDictEqual(response.json, expected_result)
 
+    def test_invalid_hostname(self):
+        # using 7th example and change the last host name
+        payload = '[{"package": "osquery", "version": "1.2.0", "host": "df1ed4ee4c364b2483261c404f5ba453.example.org"}, \
+            {"package": "freeciv", "version": "1.3.4", "host": "df1ed4ee4c364b2483261c404f5ba453.example.org"}, \
+                {"package": "pytwitter", "version": "0.1.0", "host": "df1ed4ee4c364b2483261c404f5ba453_XYZ.example.org"}]'
+
+        response = self.app.post(
+            '/vuln', headers={"Content-Type": "application/json"}, data=payload)
+
+        self.assertEqual(400, response.status_code)
+
     def tearDown(self):
         pass
 
