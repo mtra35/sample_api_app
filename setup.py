@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='api_app',
-    version='0.0.9',
+    version='0.1.0',
     description='A sample Flask Api project',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -40,7 +40,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'sample=api_app:create_app',
+            'sample=api_app:app',
         ],
     },
     include_package_data=True,

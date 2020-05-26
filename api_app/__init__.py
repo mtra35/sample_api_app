@@ -4,11 +4,9 @@ from .main.routes import initialize_routes
 from .main.errors import errors
 
 
-def create_app():
-    # Init app and api
-    app = Flask(__name__)
-    api = Api(app, errors=errors)
+# Init app and api
+app = Flask(__name__)
+api = Api(app, errors=errors)
 
-    initialize_routes(api)
+initialize_routes(api)
 
-    return app

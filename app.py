@@ -1,7 +1,5 @@
-from api_app import create_app
+from api_app import app
 
-
-app = create_app()
 
 # Run Server
 if __name__ == "__main__":

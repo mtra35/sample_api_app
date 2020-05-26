@@ -1,13 +1,7 @@
-from api_app import create_app
-import unittest
-
-app = create_app()
+from tests.BaseCase import BaseCase
 
 
-class TestPost(unittest.TestCase):
-
-    def setUp(self):
-        self.app = app.test_client()
+class TestPost(BaseCase):
 
     def test_normal_data(self):
         # using 2nd example
@@ -36,11 +30,25 @@ class TestPost(unittest.TestCase):
         response = self.app.post(
             '/vuln', headers={"Content-Type": "application/json"}, data=payload)
 
+        expected_result = {
+            "message": "The hostnames provided are invalid or inconsistent",
+            "status": 400
+        }
+
         self.assertEqual(400, response.status_code)
+        self.assertDictEqual(response.json, expected_result)
 
-    def tearDown(self):
-        pass
+    def test_version(self):
+        # testing on different version such as 1, 1.1 instead of 1.0.0
+        payload = '[{"package": "pytwitter", "version": "2.9.9", "host": "6374fb1c428241da9c9916776b6f6d08.example.org"}, \
+            {"package": "flash", "version": "1", "host": "6374fb1c428241da9c9916776b6f6d08.example.org"}, \
+                {"package": "photoshop", "version": "2.1", "host": "6374fb1c428241da9c9916776b6f6d08.example.org"}]'
 
+        response = self.app.post(
+            '/vuln', headers={"Content-Type": "application/json"}, data=payload)
 
-if __name__ == '__main__':
-    unittest.main()
+        expected_result = {"6374fb1c428241da9c9916776b6f6d08.example.org": [
+            "CVE-2020-0005", "CVE-2020-0004"]}
+
+        self.assertEqual(200, response.status_code)
+        self.assertDictEqual(response.json, expected_result)
