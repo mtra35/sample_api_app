@@ -6,6 +6,25 @@ Due to dependacies that are available in live PyPI instead of TestPyPI, please i
 
 ```python
 python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps api_app
-python3 -m pip install Flask flask-restful pandas
+python3 -m pip install Flask flask-restful pandas packaging
 ```
-# sample_api_app
+
+# Run the application
+
+[Source](https://flask.palletsprojects.com/en/1.1.x/tutorial/factory/)
+
+For Linux and Mac:
+
+```
+$ export FLASK_APP=flaskr
+$ export FLASK_ENV=development
+$ flask run
+```
+
+For Windows cmd, use **set** instead of **export**:
+
+```
+> set FLASK_APP=flaskr
+> set FLASK_ENV=development
+> flask run
+```

@@ -9,12 +9,13 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='api_app',
-    version='0.0.6',
+    version='0.0.8',
     description='A sample Flask Api project',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author='Minh Tra',
     author_email='mtra35@gmail.com',
+    url='https://github.com/mtra35/sample_api_app.git',
     classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha
@@ -47,5 +48,6 @@ setup(
         'Flask>=1.1.2',
         'Flask-RESTful>=0.3.8',
         'pandas>=1.0.3',
+        'packaging==20.4',
     ]
 )
